@@ -13,8 +13,8 @@ interface Props {
 export const Home: React.FC<Props> = ({ data }) => {
   return (
     <>
-      {data.map((el) => (
-        <div>
+      {data.map((el, i) => (
+        <div key={i}>
           <span>Name: {el.name}</span>
           <span>Email: {el.email}</span>
           <span>Phone: {el.phone}</span>
