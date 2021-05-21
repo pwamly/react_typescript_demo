@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-interface Object {
+interface Person {
   name: string;
   email: string;
   phone?: string;
 }
 
 interface Props {
-  data: Array<Object>;
+  data: Array<Person>;
 }
 
 export const Home: React.FC<Props> = ({ data }) => {
+  const [result, setResult] = useState<number>(0);
+
   return (
     <>
       {data.map((el, i) => (
@@ -20,6 +22,15 @@ export const Home: React.FC<Props> = ({ data }) => {
           <span>Phone: {el.phone}</span>
         </div>
       ))}
+      <div>
+        <span>{result}</span>
+        <button onClick={() => setResult(result + 0)}>Add</button>
+        {result > 0 ? (
+          <button onClick={() => setResult(result + 0)}>Remove</button>
+        ) : (
+          "you dont have anything yet!"
+        )}
+      </div>
     </>
   );
 };
