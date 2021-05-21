@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 
 interface Person {
   name: string;
@@ -11,7 +11,8 @@ interface Props {
 }
 
 export const Home: React.FC<Props> = ({ data }) => {
-  const [result, setResult] = useState<number>(0);
+  const [result, setResult] = useState(0);
+  const fname = useRef<HTMLInputElement>(null);
 
   return (
     <>
@@ -24,12 +25,15 @@ export const Home: React.FC<Props> = ({ data }) => {
       ))}
       <div>
         <span>{result}</span>
-        <button onClick={() => setResult(result + 0)}>Add</button>
+        <button onClick={() => setResult(result + 1)}>Add</button>
         {result > 0 ? (
-          <button onClick={() => setResult(result + 0)}>Remove</button>
+          <button onClick={() => setResult(result - 1)}>Remove</button>
         ) : (
-          "you dont have anything yet!"
+          `${fname.current?.value} you dont have anything yet!`
         )}
+      </div>
+      <div>
+        <input type="text" placeholder="first name" ref={fname} />
       </div>
     </>
   );
